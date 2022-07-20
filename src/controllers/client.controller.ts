@@ -9,11 +9,4 @@ const getClientById = async (req: Request, res: Response): Promise<Response> => 
   return res.status(200).json(clients);
 }
 
-const updateSaldo = async (req: Request, res: Response): Promise<Response> => {
-  const saldo = parseInt(req.params.saldo);
-  const newClientSaldo = await clientService.updateSaldo(saldo, req.body);
-
-  return res.status(201).json(newClientSaldo);
-}
-
-export default { getClientById, updateSaldo };
+export default { getClientById };
