@@ -1,5 +1,5 @@
 import express from 'express';
-import routers from '../routes';
+import routers from './routes';
 
 require('express-async-errors');
 
