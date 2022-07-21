@@ -1,22 +1,21 @@
 import { Request, Response } from 'express';
 import accountService from '../services/account.services';
 
-const getBalanceById = async (req: Request, res: Response): Promise<Response> => {
+const getBalanceByClient = async (req: Request, res: Response): Promise<Response> => {
   const id = parseInt(req.params.id);
-  const balance = await accountService.getBalanceById(id);
+  const balance = await accountService.getBalanceByClient(id);
   return res.status(200).json(balance);
 }
 
-const addBalance = async (req: Request, res: Response): Promise<Response> => {
-  await accountService.addBalance(req.body.id, req.body.valor);
+const addValue = async (req: Request, res: Response): Promise<Response> => {
+  await accountService.addValue(req.body);
   const { valor } = req.body;
   return res.status(201).json({ message: `R$ ${valor} adicionados a conta` });
 };
 
-const removeBalance = async (req: Request, res: Response): Promise<Response> => {
-  await accountService.addBalance(req.body.id, req.body.valor);
+const subValue = async (req: Request, res: Response): Promise<Response> => {
+  await accountService.subValue(req.body);
   const { valor } = req.body;
-
   return res.status(201).json({ message: `R$ ${valor} sacados da conta` });
 };
-export default { addBalance, removeBalance, getBalanceById };
+export default { addValue, subValue, getBalanceByClient };

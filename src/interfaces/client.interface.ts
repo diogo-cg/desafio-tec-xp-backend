@@ -1,8 +1,7 @@
 interface IClient {
   id: number,
   login: string,
-  password: string,
-  saldo: number
+  password: string
 }
 
 export default IClient;

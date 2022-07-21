@@ -1,7 +1,8 @@
 import { ResultSetHeader } from 'mysql2';
+import IAccount from '../interfaces/account.interface';
 import connection from './connection';
 
-const addBalance = async (id: number, valor: number) => {
+const addValue = async (id: number, valor: number) => {
   const [result] = await connection.execute<ResultSetHeader>(
     'INSERT INTO investxp.depositos (codCliente, valor) VALUES (?, ?) ',
     [id, valor],
@@ -9,7 +10,7 @@ const addBalance = async (id: number, valor: number) => {
   return result;
 };
 
-const removeBalance = async (id: number, valor: number) => {
+const subValue = async (id: number, valor: number) => {
   const [result] = await connection.execute<ResultSetHeader>(
     'INSERT INTO investxp.saques (codCliente, valor) VALUES (?, ?) ',
     [id, valor],
@@ -17,11 +18,26 @@ const removeBalance = async (id: number, valor: number) => {
   return result;
 };
 
-const getBalanceById = async (id: number) => {
-  const [result] = await connection.execute<ResultSetHeader>(
+const getBalanceByClient = async (id: number): Promise<IAccount> => {
+  const [result] = await connection.execute(
     'SELECT * FROM investxp.conta WHERE codCliente = ?', [id]
   );
-  return result;
+  const [account] = result as IAccount[];
+  return account as IAccount;
 };
 
-export default { addBalance, removeBalance, getBalanceById };
+const addBalance = async (id:number, valor: number): Promise<ResultSetHeader> => {
+  const [result] = await connection.execute<ResultSetHeader>(
+    'UPDATE investxp.conta SET saldo = saldo + ? WHERE id = ?', [valor, id]
+  );
+  return result;
+}
+
+const subBalance = async (id:number, valor: number, saldo: number): Promise<ResultSetHeader> => {
+  const [result] = await connection.execute<ResultSetHeader>(
+    'UPDATE investxp.conta SET saldo = ? - ? WHERE id = ?', [saldo, valor, id]
+  );
+  return result;
+}
+
+export default { addBalance, subValue, getBalanceByClient, addValue, subBalance };
