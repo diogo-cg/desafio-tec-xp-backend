@@ -19,18 +19,21 @@ CREATE TABLE investxp.ativos (
 );
 
 CREATE TABLE investxp.conta (
+  id INTEGER AUTO_INCREMENT PRIMARY KEY NOT NULL,
   codCliente INTEGER,
-  FOREIGN KEY (codCliente) REFERENCES investxp.clientes (Id),
+  FOREIGN KEY (codCliente) REFERENCES investxp.clientes (id),
   saldo DECIMAL (12,2)
 );
 
 CREATE TABLE investxp.depositos (
+  id INTEGER AUTO_INCREMENT PRIMARY KEY NOT NULL,
   codCliente INTEGER,
-  FOREIGN KEY (codCliente) REFERENCES investxp.clientes (Id),
+  FOREIGN KEY (codCliente) REFERENCES investxp.clientes (id),
   valor DECIMAL (7,2)
 );
 
 CREATE TABLE investxp.saques (
+  id INTEGER AUTO_INCREMENT PRIMARY KEY NOT NULL,
   codCliente INTEGER,
   FOREIGN KEY (codCliente) REFERENCES investxp.clientes (Id),
   valor DECIMAL (7,2)

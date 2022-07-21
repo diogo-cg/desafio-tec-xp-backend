@@ -1,4 +1,3 @@
-import { log } from 'console';
 import IAccount from '../interfaces/account.interface';
 import ITransaction from '../interfaces/transaction.interface';
 import accountModel from '../models/account.model';
