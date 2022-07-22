@@ -28,7 +28,7 @@ const getBalanceByClient = async (id: number): Promise<IAccount> => {
 
 const addBalance = async (id:number, valor: number): Promise<ResultSetHeader> => {
   const [result] = await connection.execute<ResultSetHeader>(
-    'UPDATE investxp.contas SET saldo = saldo + ? WHERE id = ?', [valor, id]
+    'UPDATE investxp.contas SET saldo = saldo + ? WHERE codCliente = ?', [valor, id]
   );
   return result;
 }
