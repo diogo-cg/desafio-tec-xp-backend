@@ -1,8 +1,8 @@
 interface IAsset {
-  codClient?: number,
+  codClient: number,
   codAtivo: number,
   qtdeAtivo: number,
-  valor?: number
+  valor: number
 }
 
 export default IAsset;

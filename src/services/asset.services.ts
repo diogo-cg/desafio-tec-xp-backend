@@ -7,7 +7,11 @@ const getAssetById = (id: number): Promise<IAsset> => {
 }
 
 const buyAsset = async (asset: IAsset ): Promise<IAsset> => {
-  const { insertId } = await assetModel.buyAsset(asset);
+  const assetClient = await assetModel.getAssetClientWallet(asset);
+  if (assetClient) { const { insertId } = await assetModel.buyAsset(asset);
+  asset.codClient = insertId;
+  return asset;
+  } const { insertId } = await assetModel.buyNewAsset(asset);
   asset.codClient = insertId;
   return asset;
 }
