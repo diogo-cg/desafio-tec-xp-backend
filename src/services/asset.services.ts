@@ -6,9 +6,16 @@ const getAssetById = (id: number): Promise<IAsset> => {
   return asset;
 }
 
-const getClientAssets = (id:number): Promise<IAsset[]> => {
-  const assets = assetModel.getClientAssets(id);
-  return assets;
+const buyAsset = async (asset: IAsset ): Promise<IAsset> => {
+  const { insertId } = await assetModel.buyAsset(asset);
+  asset.codClient = insertId;
+  return asset;
 }
 
-export default { getAssetById, getClientAssets };
+const sellAsset = async ( movie: IAsset): Promise<IAsset> => {
+  const { insertId } = await assetModel.sellAsset(movie);
+  movie.codClient = insertId;
+  return movie
+}
+
+export default { getAssetById, buyAsset, sellAsset };

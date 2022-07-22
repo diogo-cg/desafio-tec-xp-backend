@@ -8,10 +8,14 @@ const getAssetById = async (req: Request, res: Response): Promise<Response> => {
   return res.status(200).json(asset);
 }
 
-const getClientAssets = async (req: Request, res: Response): Promise<Response> => {
-  const id = parseInt(req.params.id);
-  const assets = await assetService.getClientAssets(id);
-  return res.status(200).json(assets);
+const buyAsset = async (req: Request, res: Response): Promise<Response> => {
+  const asset = await assetService.buyAsset(req.body);
+  return res.status(201).json(asset);
 }
 
-export default { getAssetById, getClientAssets };
+const sellAsset = async (req: Request, res: Response): Promise<Response> => {
+  const movie = await assetService.sellAsset(req.body);
+  return res.status(201).json(movie);
+}
+
+export default { getAssetById, buyAsset, sellAsset };

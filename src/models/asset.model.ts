@@ -1,3 +1,4 @@
+import { ResultSetHeader } from 'mysql2';
 import IAsset from '../interfaces/asset.interface';
 import connection from './connection';
 
@@ -9,14 +10,20 @@ const getAssetById = async (id: number): Promise<IAsset> => {
   return asset as IAsset;
 }
 
-const getClientAssets = async(id:number): Promise<IAsset[]> => {
-  const [result] = await connection.execute(
-    `SELECT ca.codCliente, ca.codAtivo, ca.qtdeAtivo, a.valor
-    FROM investxp.carteira ca 
-    JOIN investxp.ativos a on ca.codAtivo = a.id 
-    WHERE codCliente = ?;`,[id],
+const buyAsset = async(asset: IAsset): Promise<ResultSetHeader> => {
+  const [result] = await connection.execute<ResultSetHeader>(
+    `INSERT INTO investxp.carteiras (codCliente, codAtivo, qtdeAtivo)
+    VALUES (?, ?, ?)` ,[asset.codClient, asset.codAtivo, asset.qtdeAtivo],
 );
-return result as IAsset[];
+return result;
 }
 
-export default { getAssetById, getClientAssets };
+const sellAsset = async(asset: IAsset): Promise<ResultSetHeader> => {
+  const [result] = await connection.execute<ResultSetHeader>(
+    `UPDATE investxp.carteiras SET qtdeAtivo = qtdeAtivo - ? WHERE codAtivo = ? AND codCliente = ?;` ,
+    [asset.qtdeAtivo, asset.codAtivo, asset.codClient],
+);
+return result;
+}
+
+export default { getAssetById, buyAsset, sellAsset };

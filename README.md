@@ -18,17 +18,17 @@ CREATE TABLE investxp.ativos (
   valor DECIMAL (6,2) NOT NULL
 );
 
-CREATE TABLE investxp.conta (
+CREATE TABLE investxp.contas (
   id INTEGER AUTO_INCREMENT PRIMARY KEY NOT NULL,
   codCliente INTEGER,
-  FOREIGN KEY (codCliente) REFERENCES investxp.clientes (id),
+  FOREIGN KEY (codCliente) REFERENCES investxp.clientes (Id),
   saldo DECIMAL (12,2)
 );
 
 CREATE TABLE investxp.depositos (
   id INTEGER AUTO_INCREMENT PRIMARY KEY NOT NULL,
   codCliente INTEGER,
-  FOREIGN KEY (codCliente) REFERENCES investxp.clientes (id),
+  FOREIGN KEY (codCliente) REFERENCES investxp.clientes (Id),
   valor DECIMAL (7,2)
 );
 
@@ -37,6 +37,33 @@ CREATE TABLE investxp.saques (
   codCliente INTEGER,
   FOREIGN KEY (codCliente) REFERENCES investxp.clientes (Id),
   valor DECIMAL (7,2)
+);
+
+CREATE TABLE investxp.carteiras (
+  id INTEGER AUTO_INCREMENT PRIMARY KEY NOT NULL,
+  codCliente INTEGER,
+  FOREIGN KEY (codCliente) REFERENCES investxp.clientes (Id),
+  codAtivo INTEGER,
+  FOREIGN KEY (codAtivo) REFERENCES investxp.ativos (Id),
+  qtdeAtivo INTEGER
+);
+
+CREATE TABLE investxp.compras (
+  id INTEGER AUTO_INCREMENT PRIMARY KEY NOT NULL,
+  codCliente INTEGER,
+  FOREIGN KEY (codCliente) REFERENCES investxp.clientes (Id),
+  codAtivo INTEGER NOT NULL,
+  FOREIGN KEY (codAtivo) REFERENCES investxp.ativos (Id),
+  qtdeAtivo INTEGER
+);
+
+CREATE TABLE investxp.vendas (
+  id INTEGER AUTO_INCREMENT PRIMARY KEY NOT NULL,
+  codCliente INTEGER,
+  FOREIGN KEY (codCliente) REFERENCES investxp.clientes (Id),
+  codAtivo INTEGER NOT NULL,
+  FOREIGN KEY (codAtivo) REFERENCES investxp.ativos (Id),
+  qtdeAtivo INTEGER
 );
 
 # POPULANDO BANCO DE DADOS
@@ -60,33 +87,25 @@ VALUES ('1000', '0.82'),
 ('2500', '10.53'),
 ('1300', '20.05');
 
-INSERT INTO investxp.depositos (codCliente, valor)
-VALUES ('1','1000'),
-('1','3000'),
-('1','500'),
-('2','1800'),
-('2','1300'),
-('3','1500'),
-('3','2100'),
-('4','800'),
-('4','700'),
-('5','1200');
-
-INSERT INTO investxp.conta (codCliente, saldo)
+INSERT INTO investxp.contas (codCliente, saldo)
 VALUES ('1','50000'),
 ('2','30000'),
 ('3','10000'),
 ('4','80000'),
 ('5','30000');
 
-INSERT INTO investxp.saques (codCliente, valor)
-VALUES ('1','500'),
-('1','300'),
-('1','100'),
-('2','800'),
-('2','300'),
-('3','500'),
-('3','100'),
-('4','300'),
-('4','200'),
-('5','200');
+INSERT INTO investxp.carteiras (codCliente, codAtivo, qtdeAtivo)
+VALUES ('1', '5', '153'),
+('1', '3', '54'),
+('1', '9', '89'),
+('1', '4', '211'),
+('2', '5', '113'),
+('2', '10', '81'),
+('2', '9', '92'),
+('3', '8', '100'),
+('3', '7', '154'),
+('4', '6', '65'),
+('4', '5', '78'),
+('5', '4', '108'),
+('5', '3', '205'),
+('5', '2', '169')
