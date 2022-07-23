@@ -14,8 +14,8 @@ const buyAsset = async (req: Request, res: Response): Promise<Response> => {
 }
 
 const sellAsset = async (req: Request, res: Response): Promise<Response> => {
-  const movie = await assetService.sellAsset(req.body);
-  return res.status(201).json(movie);
+  const asset = await assetService.sellAsset(req.body);
+  return res.status(201).json(asset);
 }
 
 export default { getAssetById, buyAsset, sellAsset };

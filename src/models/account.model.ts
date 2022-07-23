@@ -33,9 +33,9 @@ const addBalance = async (id:number, valor: number): Promise<ResultSetHeader> =>
   return result;
 }
 
-const subBalance = async (id:number, valor: number, saldo: number): Promise<ResultSetHeader> => {
+const subBalance = async (id:number, valor: number): Promise<ResultSetHeader> => {
   const [result] = await connection.execute<ResultSetHeader>(
-    'UPDATE investxp.contas SET saldo = ? - ? WHERE id = ?', [saldo, valor, id]
+    'UPDATE investxp.contas SET saldo = saldo - ? WHERE id = ?', [ valor, id]
   );
   return result;
 }

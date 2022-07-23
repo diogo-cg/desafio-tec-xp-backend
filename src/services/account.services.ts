@@ -21,7 +21,7 @@ const subValue = async (saque: ITransaction): Promise<ITransaction> => {
   const account = await getBalanceByClient(saque.codCliente);
   if (!account) throw new HttpException(400, 'Conta de cliente nao encontrada');
   if (+account.saldo < +saque.valor) throw new HttpException(400, 'Saldo insuficiente em conta para saque');
-  await accountModel.subBalance(account.id, saque.valor, account.saldo);
+  await accountModel.subBalance(account.id, saque.valor);
   const { insertId } = await accountModel.addValue(saque.codCliente, saque.valor);
   saque.id = insertId;
   return saque;
