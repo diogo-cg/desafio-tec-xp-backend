@@ -19,7 +19,7 @@ const subValue = async (id: number, valor: number) => {
 };
 
 const getBalanceByClient = async (id: number): Promise<IAccount> => {
-  const [result] = await connection.execute('SELECT * FROM investxp.contas WHERE codCliente = ?', [id]);
+  const [result] = await connection.execute('SELECT codCliente, saldo FROM investxp.contas WHERE codCliente = ?', [id]);
   const [account] = result as IAccount[];
   return account as IAccount;
 };
