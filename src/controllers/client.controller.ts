@@ -9,4 +9,9 @@ const getClientById = async (req: Request, res: Response): Promise<Response> => 
   return res.status(200).json(client);
 }
 
-export default { getClientById };
+const getMatchClient = async (req: Request, res: Response): Promise<Response> => {
+  const client = await clientService.getMatchClient(req.body);
+  return res.status(200).json(client);
+}
+
+export default { getClientById, getMatchClient };

@@ -5,4 +5,9 @@ const getClientById = (id: number): Promise<IClient> => {
   return clientModel.getClientById(id);
 }
 
-export default { getClientById };
+const getMatchClient = (client: IClient): Promise<IClient> => {
+  const clients = clientModel.getMatchClient(client);
+  return clients;
+}
+
+export default { getClientById, getMatchClient };
