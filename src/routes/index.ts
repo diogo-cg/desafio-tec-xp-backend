@@ -2,7 +2,7 @@ import { Router } from 'express';
 import accountController from '../controllers/account.controller';
 import assetController from '../controllers/asset.controller';
 import walletController from '../controllers/wallet.controller';
-import authController from "../controllers/auth.controller";
+import authController from '../controllers/auth.controller';
 import validateToken from '../middleware/auth.middleware';
 
 require('express-async-errors');

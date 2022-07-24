@@ -30,6 +30,6 @@ const subValue = async (saque: ITransaction): Promise<ITransaction> => {
 const getBalanceByClient = (id: number):Promise<IAccount> => {
   const balance = accountModel.getBalanceByClient(id);
   return balance;
-}
+};
 
 export default { addValue, subValue, getBalanceByClient };

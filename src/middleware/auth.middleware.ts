@@ -1,4 +1,4 @@
-import { NextFunction, Request, Response } from "express";
+import { NextFunction, Request, Response } from 'express';
 import TokenGenerator from '../utils/tokenJWT';
 
 const validateToken = async (req: Request, res: Response, next: NextFunction) => {

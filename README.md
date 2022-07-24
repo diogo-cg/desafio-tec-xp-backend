@@ -1,7 +1,7 @@
 # desafio-tec-xp-backend
 Repositório criado para o desafio técnico da XP ( Back end)
 
-# COMANDOS PARA CRIAR DO BANCO DE DADOS E TABELAS INICIAIS(MYSQL)
+# COMANDOS PARA CRIAR DO BANCO DE DADOS E TABELAS INICIAIS (MYSQL)
 
 DROP SCHEMA IF EXISTS investxp;
 CREATE SCHEMA investxp;
@@ -54,7 +54,8 @@ CREATE TABLE investxp.compras (
   FOREIGN KEY (codCliente) REFERENCES investxp.clientes (Id),
   codAtivo INTEGER NOT NULL,
   FOREIGN KEY (codAtivo) REFERENCES investxp.ativos (Id),
-  qtdeAtivo INTEGER
+  qtdeAtivo INTEGER,
+  valor DECIMAL (6,2) NOT NULL
 );
 
 CREATE TABLE investxp.vendas (
@@ -63,7 +64,8 @@ CREATE TABLE investxp.vendas (
   FOREIGN KEY (codCliente) REFERENCES investxp.clientes (Id),
   codAtivo INTEGER NOT NULL,
   FOREIGN KEY (codAtivo) REFERENCES investxp.ativos (Id),
-  qtdeAtivo INTEGER
+  qtdeAtivo INTEGER,
+  valor DECIMAL (6,2) NOT NULL
 );
 
 # POPULANDO BANCO DE DADOS

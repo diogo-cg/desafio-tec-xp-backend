@@ -8,32 +8,33 @@ import HttpException from '../utils/http.exception';
 const getAssetById = (id: number): Promise<IBrokerAsset> => {
   const asset = assetModel.getAssetById(id);
   return asset;
-}
+};
 
-const buyAsset = async (asset: IAsset ): Promise<IAsset> => {
+const buyAsset = async (asset: IAsset): Promise<IAsset> => {
   const assetClient = await assetModel.getAssetClientWallet(asset);
   const assetAvailableById = await assetModel.getAssetById(asset.codAtivo);
   if (asset.qtdeAtivo > assetAvailableById.qtdeAtivo) throw new HttpException(400, 'Quantidade indisponível na corretora');
   // validado se o cliente nao possuir ativo sera adicionado novo ativo,
   // caso possua o mesmo sera atualizado com a nova quantidade
   const buyValue = (+asset.qtdeAtivo * +assetAvailableById.valor);
-  if (assetClient) { 
+  if (assetClient) {
     await assetModel.buyAsset(asset);
-  // removida quantidade vendida a quantidade disponível na corretora e removido valor da compra do saldo do cliente;
-  asset.valor = assetAvailableById.valor;
-  await assetModel.removeBrokerAsset(asset.qtdeAtivo, asset.codAtivo);
-  await accountModel.subBalance(asset.codClient, buyValue);
-  await assetModel.buyHistory(asset);
-  return asset;
+    // removida quantidade vendida a quantidade disponível na corretora
+    // e removido valor da compra do saldo do cliente.
+    asset.valor = assetAvailableById.valor;
+    await assetModel.removeBrokerAsset(asset.qtdeAtivo, asset.codAtivo);
+    await accountModel.subBalance(asset.codClient, buyValue);
+    await assetModel.buyHistory(asset);
+    return asset;
   }
   await assetModel.buyNewAsset(asset);
   await assetModel.removeBrokerAsset(asset.qtdeAtivo, asset.codAtivo);
   await accountModel.subBalance(asset.codClient, buyValue);
   await assetModel.buyHistory(asset);
   return asset;
-}
+};
 
-const sellAsset = async ( asset: IAsset): Promise<IAsset> => {
+const sellAsset = async (asset: IAsset): Promise<IAsset> => {
   const clientAssetWallet = await walletModel.getClientWalletByAsset(asset);
   // validado se o cliente possui o ativo
   if (!clientAssetWallet) throw new HttpException(400, 'Ativo não encontrado na carteira do Cliente');
@@ -48,6 +49,6 @@ const sellAsset = async ( asset: IAsset): Promise<IAsset> => {
   // adicionado quantidade vendida a quantidade disponível na corretora;
   await assetModel.addBrokerAsset(asset.qtdeAtivo, asset.codAtivo);
   return asset;
-}
+};
 
 export default { getAssetById, buyAsset, sellAsset };
