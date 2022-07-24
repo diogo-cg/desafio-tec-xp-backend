@@ -19,7 +19,7 @@ const subValue = async (id: number, valor: number) => {
 };
 
 const getBalanceByClient = async (id: number): Promise<IAccount> => {
-  const [result] = await connection.execute('SELECT codCliente, saldo FROM investxp.contas WHERE codCliente = ?', [id]);
+  const [result] = await connection.execute('SELECT id as codConta, codCliente, saldo FROM investxp.contas WHERE codCliente = ?', [id]);
   const [account] = result as IAccount[];
   return account as IAccount;
 };
@@ -30,7 +30,7 @@ const addBalance = async (id:number, valor: number): Promise<ResultSetHeader> =>
 };
 
 const subBalance = async (id:number, valor: number): Promise<ResultSetHeader> => {
-  const [result] = await connection.execute<ResultSetHeader>('UPDATE investxp.contas SET saldo = saldo - ? WHERE id = ?', [valor, id]);
+  const [result] = await connection.execute<ResultSetHeader>('UPDATE investxp.contas SET saldo = saldo - ? WHERE codCliente = ?', [valor, id]);
   return result;
 };
 

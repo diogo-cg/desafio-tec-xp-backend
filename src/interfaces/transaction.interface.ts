@@ -1,5 +1,5 @@
 interface ITransaction {
-  id: number,
+  codConta: number,
   codCliente: number,
   valor: number
 }

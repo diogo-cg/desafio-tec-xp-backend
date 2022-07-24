@@ -9,9 +9,9 @@ const addValue = async (deposito: ITransaction): Promise<ITransaction> => {
   }
   const account = await getBalanceByClient(deposito.codCliente);
   if (!account) throw new HttpException(400, 'Conta de cliente nao encontrada');
-  await accountModel.addBalance(account.id, deposito.valor);
+  await accountModel.addBalance(account.codConta, deposito.valor);
   const { insertId } = await accountModel.addValue(deposito.codCliente, deposito.valor);
-  deposito.id = insertId;
+  deposito.codConta = insertId;
   return deposito;
 };
 const subValue = async (saque: ITransaction): Promise<ITransaction> => {
@@ -21,9 +21,9 @@ const subValue = async (saque: ITransaction): Promise<ITransaction> => {
   const account = await getBalanceByClient(saque.codCliente);
   if (!account) throw new HttpException(400, 'Conta de cliente nao encontrada');
   if (+account.saldo < +saque.valor) throw new HttpException(400, 'Saldo insuficiente em conta para saque');
-  await accountModel.subBalance(account.id, saque.valor);
+  await accountModel.subBalance(account.codConta, saque.valor);
   const { insertId } = await accountModel.addValue(saque.codCliente, saque.valor);
-  saque.id = insertId;
+  saque.codConta = insertId;
   return saque;
 };
 

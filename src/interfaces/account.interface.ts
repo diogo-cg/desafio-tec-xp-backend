@@ -1,5 +1,5 @@
 interface IAccount {
-  id: number,
+  codConta: number,
   codCliente: number,
   saldo: number
 }

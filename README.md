@@ -124,7 +124,7 @@ Na pasta src do repositório possui um arquivo chamado '.env.example o mesmo dev
 os atributos DATABASE_USER='seu usuário do MYSQL' e DATABASE_PASS='sua senha do MYSQL' deverão ser modificados colocando os valores de usuário e senha do MYSQL de quem clonar o repositório.
 
 
-# ROTAS
+# ROTA AUTORIZAÇÃO
 
 Rota POST '/auth'
 Esta rota serve para o cliente logar e assim conseguir o token para ter permissão para as outras rotas
@@ -146,7 +146,9 @@ SAIDA:
   "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJsb2dpbiI6Im1hcmlhIiwiaWQiOjIsImlhdCI6MTY1ODY4NjYyN30.Rmfi9XeomqASxMIQtRh1c3Lmet6hQjRcynGSN1tnZZE"
 }
 
-LEMBRANDO QUE TODAS AS ROTAS ABAIXO DEVERÃO POSSUIR EM SEU HEADER A CHAVE AUTHORIZATION COM O VALOR DO TOKEN GERADO.
+# LEMBRANDO QUE TODAS AS ROTAS ABAIXO DEVERÃO POSSUIR EM SEU HEADER A CHAVE AUTHORIZATION COM O VALOR DO TOKEN GERADO.
+
+# ROTAS
 
 Rota GET '/conta/:id'
 Esta rota serve para verificar a o saldo do cliente na corretora.
@@ -156,6 +158,7 @@ Parâmetros de entrada é o o Código único do cliente(codCliente) que devera s
 SAIDA:
 
 {
+  "codConta": 1
   "codCliente": 1,
   "saldo": "60390.15"
 }
