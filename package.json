@@ -11,6 +11,7 @@
     "fasttest": "jest --runInBand --verbose --bail",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
   },
+  "engines": {"node:": ">=14"},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/diogo-cg/desafio-tec-xp-backend.git"
