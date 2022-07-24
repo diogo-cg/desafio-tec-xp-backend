@@ -1,4 +1,4 @@
-# desafio-tec-xp-backend
+# Desafio-tec-xp-backend
 Repositório criado para o desafio técnico da XP INC. ( Back end)
 
 Este repositório foi criado para criação de uma API de investimentos afim de atender aos desafios propostos pela XP INC.
@@ -126,7 +126,8 @@ os atributos DATABASE_USER='seu usuário do MYSQL' e DATABASE_PASS='sua senha do
 
 # ROTA AUTORIZAÇÃO
 
-Rota POST '/auth'
+## Rota POST '/auth'
+
 Esta rota serve para o cliente logar e assim conseguir o token para ter permissão para as outras rotas
 
 Parâmetros de entrada são o login e senha que deverão ser passados pelo body da seguinte forma:
@@ -150,7 +151,8 @@ SAIDA:
 
 # ROTAS
 
-Rota GET '/conta/:id'
+## Rota GET '/conta/:id'
+
 Esta rota serve para verificar a o saldo do cliente na corretora.
 
 Parâmetros de entrada é o o Código único do cliente(codCliente) que devera ser passado na URL.
@@ -163,7 +165,8 @@ SAIDA:
   "saldo": "60390.15"
 }
 
-Rota POST '/conta/deposito'
+## Rota POST '/conta/deposito'
+
 Esta rota serve para adicionar valor ao saldo do cliente na corretora.
 
 Parâmetros de entrada são o Código único do cliente(codCliente) e o valor a ser depositado que deverão ser passados pelo body.
@@ -181,7 +184,8 @@ SAIDA:
   "message": "R$ 40000.00 adicionados a conta"
 }
 
-Rota POST '/conta/saque'
+## Rota POST '/conta/saque'
+
 Esta rota serve para remover valor ao saldo do cliente na corretora.
 
 Parâmetros de entrada são o Código único do cliente(codCliente) e o valor a ser sacado que deverão ser passados pelo body.
@@ -199,7 +203,8 @@ SAIDA:
   "message": "R$ 40000.00 sacados da conta"
 }
 
-Rota GET '/ativos/:id'
+## Rota GET '/ativos/:id'
+
 Esta rota serve para verificar a quantidade disponível de certo ativo na corretora.
 
 Parâmetros de entrada é o Código único do ativo(codCAtivo) que será passado junto a URL.
@@ -212,7 +217,8 @@ SAIDA:
   "valor": "2.55"
 }
 
-Rota GET '/ativos/cliente/:id'
+## Rota GET '/ativos/cliente/:id'
+
 Esta rota serve para verificar as quantidades de ativos que um cliente possui em sua carteira.
 
 Parâmetros de entrada é o Código único do cliente(codCliente) que será passado junto a URL.
@@ -240,8 +246,32 @@ SAIDA:
   }
 ]
 
-Rota POST '/investimentos/comprar'
+## Rota POST '/investimentos/comprar'
+
 Esta rota serve para o cliente conseguir comprar um certo ativo disponível na corretora.
+
+Parâmetros de entrada são o código único do cliente(codCliente), código único do ativo(codCAtivo) e a quantidade a ser comprada pelo cliente que deverão ser passados pelo body.
+
+ENTRADA:
+
+{
+  "codClient": 2,
+  "codAtivo": 5,
+  "qtdeAtivo": 500
+}
+
+SAIDA:
+
+{
+  "codClient": 2,
+  "codAtivo": 5,
+  "qtdeAtivo": 500,
+  "valor": "2.55"
+}
+
+## Rota POST '/investimentos/vender'
+
+Esta rota serve para o cliente conseguir vender um certo ativo disponível na carteira.
 
 Parâmetros de entrada são o código único do cliente(codCliente), código único do ativo(codCAtivo) e a quantidade a ser comprada pelo cliente que deverão ser passados pelo body.
 
