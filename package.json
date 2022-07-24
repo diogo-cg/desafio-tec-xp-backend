@@ -4,15 +4,12 @@
   "description": "Repositório criado para o desafio técnico da XP ( Back end )",
   "main": "src/index.js",
   "scripts": {
-    "start": "node src/index.js",
-    "build": "tsc",
-    "type": "module",
+    "start": "ts-node src/index.ts",
     "dev": "nodemon --watch \"./src/**\" --ext \"ts,js\" --ignore \"src/**/*.spec.ts,src/**/*.json\" --exec \"ts-node src/index.ts\"",
     "test": "jest --runInBand --verbose",
     "fasttest": "jest --runInBand --verbose --bail",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
   },
-  "engines": {"node:": ">=14"},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/diogo-cg/desafio-tec-xp-backend.git"
